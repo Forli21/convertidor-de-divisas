@@ -58,12 +58,13 @@ h1 {
     border-right: solid white;
 }
 
-.origin-title, h2 {
+h2 {
     color: #fff;
     margin-bottom: 20px;
     font-size: 1.5em;
     text-transform: uppercase;
     letter-spacing: 1px;
+    margin-top: 0;  /* Asegúrate de que no haya margen superior */
 }
 
 input[type="text"] {
@@ -74,9 +75,9 @@ input[type="text"] {
     background-color: transparent;
     border: none;
     border-bottom: 2px solid transparent;
-    color: #fff;
+    color: #fff; 
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 1s ease;
 }
 
 input[type="text"]::placeholder {
@@ -89,17 +90,20 @@ input[type="text"]:focus {
     border-bottom: 2px solid #00f2fe;
 }
 
-select, button {
+select {
     margin: 15px 0;
     padding: 15px;
     width: 90%;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-size: 16px;
+    font-size: 20px;
+    color: aliceblue;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #2e2d2d;
 }
-#amount{
+
+#amount {
     height: 150px;
     width: 500px;
     background-color: #202020;
@@ -109,8 +113,9 @@ select, button {
     color: aliceblue;
     text-align: center;
 }
-#amount::placeholder{
-    color:#ccc
+
+#amount::placeholder {
+    color: #ccc;
 }
 
 select:focus, button:focus {
@@ -119,26 +124,13 @@ select:focus, button:focus {
     box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
 }
 
-button {
-    background-color: #28a745;
-    color: white;
-    cursor: pointer;
-    border: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-button:hover {
-    background-color: #218838;
-    transform: scale(1.05);
-}
-
 #result {
-    margin-top: 20px;
-    font-size: 20px;
+    padding-top: 16%;
+    padding-bottom: 16%;
+    font-size: 28px; /* Aumenta el tamaño de fuente para que sea más grande */
     color: #fff;
     text-align: center;
+    align-self: center; /* Alinea el texto en el centro del panel */
 }
 
 @media (max-width: 768px) {
