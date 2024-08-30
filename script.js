@@ -1,8 +1,6 @@
-
-
 async function fetchExchangeRates() {
-    const apiKey = '319a303037cec8f2dbd3b74f';  // Reemplaza con tu clave de API
-    const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/CRC`; // O la URL de la API que estés usando
+    const apiKey = '319a303037cec8f2dbd3b74f'; 
+    const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/CRC`; 
 
     try {
         const response = await fetch(apiUrl);
@@ -11,8 +9,7 @@ async function fetchExchangeRates() {
         if (data.result !== "success") {
             throw new Error("Error al obtener las tasas de cambio");
         }
-
-        return data.conversion_rates; // Este será un objeto con las tasas de cambio
+        return data.conversion_rates;
     } catch (error) {
         console.error("Error al conectar con la API:", error);
         return null;
@@ -39,9 +36,8 @@ async function convert() {
 
     let fromCurrencyCode = currencyMap[fromCurrency];
     let toCurrencyCode = currencyMap[toCurrency];
-
-    // Obtén las tasas de cambio desde la API
     let exchangeRates = await fetchExchangeRates();
+
     if (!exchangeRates) {
         document.getElementById('result').innerText = 'Error obteniendo tasas de cambio';
         return;

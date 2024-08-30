@@ -64,9 +64,8 @@ h2 {
     font-size: 1.5em;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 0;  /* Asegúrate de que no haya margen superior */
+    margin-top: 0;
 }
-
 input[type="text"] {
     margin: 15px 0;
     padding: 15px;
@@ -125,12 +124,12 @@ select:focus, button:focus {
 }
 
 #result {
-    padding-top: 16%;
+    padding-top: 21%;
     padding-bottom: 16%;
-    font-size: 28px; /* Aumenta el tamaño de fuente para que sea más grande */
+    font-size: 28px; 
     color: #fff;
     text-align: center;
-    align-self: center; /* Alinea el texto en el centro del panel */
+    align-self: center;
 }
 
 @media (max-width: 768px) {
