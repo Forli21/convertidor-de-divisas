@@ -4,6 +4,7 @@
   "description": "Un convertidor de divisas desarrollado en JavaScript",
   "main": "index.html",
   "scripts": {
+    "eslint" **/*.js"
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Esteban Paniagua Chacón",
