@@ -2,7 +2,7 @@
   "name": "convertidor-de-divisas",
   "version": "1.0.0",
   "description": "Un convertidor de divisas desarrollado en JavaScript",
-  "main": "index.html",
+  "main": "script.js",
   "scripts": {
     "lint": "eslint '**/*.js'"
   },
