@@ -16,14 +16,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run your script
-        run: |
-          export API_KEY=${{ secrets.YOUR_API_KEY }}
-          # Aquí puedes ejecutar un script que utilice la API key, como tu script JavaScript
-          # Por ejemplo, si tu script se llama 'script.js':
-          node script.js
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # Asegúrate de que el directorio corresponda al de tus archivos estáticos
 
-      - name: Use API Key
-        run: echo "API_KEY=${{ secrets.API_KEY }}" >> .env
 
 
