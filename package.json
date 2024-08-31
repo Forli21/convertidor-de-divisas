@@ -4,7 +4,7 @@
   "description": "Un convertidor de divisas desarrollado en JavaScript",
   "main": "index.html",
   "scripts": {
-    "lint": "eslint '**/*.js'",
+    "lint": "eslint '**/*.js'"
   },
   "author": "Esteban Paniagua Chacón",
   "license": "MIT",
