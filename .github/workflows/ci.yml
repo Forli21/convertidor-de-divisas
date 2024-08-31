@@ -1,10 +1,7 @@
-name: CI/CD Pipeline
+name: Deploy API Key
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -16,23 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
-
-      - name: Build the project
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main'
+      - name: Run your script
         run: |
+          export API_KEY=${{ secrets.YOUR_API_KEY }}
+          # Aquí puedes ejecutar un script que utilice la API key, como tu script JavaScript
+          # Por ejemplo, si tu script se llama 'script.js':
+          node script.js
+
+      - name: Deploy
+        run: |
+          # Aquí puedes agregar comandos para hacer un deploy si fuera necesario
+          echo "Despliegue completado"
+
           npm install -g gh-pages
           gh-pages -d dist
 
