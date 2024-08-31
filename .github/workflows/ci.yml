@@ -16,7 +16,7 @@ jobs:
         run: npm install
       - name: Insert API Key into JS
         run: |
-          echo "const API_KEY = '${{ secrets.YOUR_API_KEY }}';" > public/apiKey.js
+          echo "const API_KEY = '${{ secrets.YOUR_API_KEY }}';" > apiKey.js
         
       - name: Build and Deploy
         run: |
