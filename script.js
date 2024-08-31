@@ -1,5 +1,5 @@
 async function fetchExchangeRates() {
-    const apiKey = process.env.API_KEY; 
+    const apiKey = API_KEY; 
     const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/CRC`; 
 
     try {
