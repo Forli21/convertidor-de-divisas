@@ -12,6 +12,6 @@
     "axios": "^0.21.1"
   },
   "devDependencies": {
-    "eslint": "^7.32.0" // Versión puede variar
+    "eslint": "^7.32.0"
   }
 }
