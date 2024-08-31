@@ -23,14 +23,6 @@ jobs:
           # Por ejemplo, si tu script se llama 'script.js':
           node script.js
 
-      - name: Deploy
-        run: |
-          # Aquí puedes agregar comandos para hacer un deploy si fuera necesario
-          echo "Despliegue completado"
-
-          npm install -g gh-pages
-          gh-pages -d dist
-
       - name: Use API Key
         run: echo "API_KEY=${{ secrets.API_KEY }}" >> .env
 
