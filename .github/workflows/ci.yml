@@ -13,8 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm install
       - name: Run your script
         run: |
           export API_KEY=${{ secrets.YOUR_API_KEY }}
@@ -27,4 +25,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: gh-pages -d # Asegúrate de que el directorio corresponda al de tus archivos estáticos
-
