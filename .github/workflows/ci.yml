@@ -14,12 +14,16 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: npm install
-      - name: Run your script
+      - name: Insert API Key into JS
         run: |
-          export API_KEY=${{ secrets.YOUR_API_KEY }}
-          # Aquí puedes ejecutar un script que utilice la API key, como tu script JavaScript
-          # Por ejemplo, si tu script se llama 'script.js':
-          node script.js
+          echo "const API_KEY = '${{ secrets.YOUR_API_KEY }}';" > public/apiKey.js
+        
+      - name: Build and Deploy
+        run: |
+          npm run build
+          npm run deploy
+        env:
+          API_KEY: ${{ secrets.YOUR_API_KEY }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
