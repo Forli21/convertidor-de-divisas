@@ -1,6 +1,6 @@
 async function fetchExchangeRates() {
     const apiKey = API_KEY; 
-    const apiUrl = `https://api.exchangeratesapi.io/v1/latest?access_key=${apiKey}`; 
+    const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/CRC`; 
 
     try {
         const response = await fetch(apiUrl);
@@ -27,7 +27,7 @@ async function convert() {
     }
 
     const currencyMap = {
-        "Colones": "CRC",
+        "Colones": "CRC", 
         "Dolares": "USD",
         "Euros": "EUR",
         "Libras": "GBP",
