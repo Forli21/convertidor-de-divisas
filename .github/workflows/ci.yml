@@ -12,6 +12,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      backend:
+        image: mcr.microsoft.com/dotnet/aspnet:6.0
+        ports:
+          - 5000:5000
+
     steps:
     - name: Check out the repository
       uses: actions/checkout@v2
