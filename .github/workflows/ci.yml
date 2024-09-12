@@ -19,7 +19,7 @@ jobs:
           dotnet-version: '8.0.x'
           
       - name: Restore dependencies
-        working-directory: ./ExchangeAPI/ExchangeAPI # Ajusta al directorio correcto
+        working-directory: ./ExchangeAPI/ExchangeAPI
         run: dotnet restore
         
       - name: Build the project
@@ -29,6 +29,10 @@ jobs:
       - name: Publish the app
         working-directory: ./ExchangeAPI/ExchangeAPI
         run: dotnet publish --configuration Release --output ./publish
+
+      - name: Start the backend server
+        working-directory: ./ExchangeAPI/ExchangeAPI/publish
+        run: dotnet ExchangeAPI.dll &
         
       - name: Install dependencies
         run: npm install
@@ -43,6 +47,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: gh-pages -d # Asegúrate de que el directorio corresponda al de tus archivos estáticos
+          publish_dir: gh-pages -d
 
 
