@@ -7,16 +7,10 @@ on:
   pull_request:
     branches:
       - master
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    services:
-      backend:
-        image: mcr.microsoft.com/dotnet/aspnet:6.0
-        ports:
-          - 5000:5000
 
     steps:
     - name: Check out the repository
@@ -28,7 +22,7 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      working-directory: ./ExchangeAPI/ExchangeAPI # Cambia al directorio correcto
+      working-directory: ./ExchangeAPI/ExchangeAPI # Ajusta al directorio correcto
       run: dotnet restore
 
     - name: Build the project
@@ -37,10 +31,10 @@ jobs:
 
     - name: Publish the app
       working-directory: ./ExchangeAPI/ExchangeAPI
-      run: dotnet publish --configuration Release --output ./publish}
-      
-    - name: Build frontend
-      run: npm run build
+      run: dotnet publish --configuration Release --output ./publish
+
+    # Aquí puedes agregar más pasos si es necesario, como desplegar la aplicación
+
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
