@@ -1,34 +1,31 @@
-name: Build and Deploy ExchangeAPI
+name: Deploy API Key
 
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - master
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the repository
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '8.0.x'
+      - name: Install dependencies
+        run: npm install
+      - name: Run your script
+        run: |
+          export API_KEY=${{ secrets.YOUR_API_KEY }}
+          # Aquí puedes ejecutar un script que utilice la API key, como tu script JavaScript
+          # Por ejemplo, si tu script se llama 'script.js':
+          node script.js
 
-    - name: Restore dependencies
-      working-directory: ./ExchangeAPI/ExchangeAPI # Ajusta al directorio correcto
-      run: dotnet restore
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: gh-pages -d # Asegúrate de que el directorio corresponda al de tus archivos estáticos
 
-    - name: Build the project
-      working-directory: ./ExchangeAPI/ExchangeAPI
-      run: dotnet build --configuration Release --no-restore
 
-    - name: Publish the app
-      working-directory: ./ExchangeAPI/ExchangeAPI
-      run: dotnet publish --configuration Release --output ./publish
