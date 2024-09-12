@@ -36,6 +36,7 @@ jobs:
         
       - name: Run your script
         run: |
+          export API_KEY=${{ secrets.YOUR_API_KEY }}
           node script.js
 
       - name: Deploy to GitHub Pages
