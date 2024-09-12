@@ -1,4 +1,4 @@
-name: Deploy API Key
+name: ASP.NET Core Backend with Frontend Deployment
 
 on:
   push:
@@ -6,28 +6,41 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install dependencies
-        run: npm install
-      - name: Insert API Key into JS
-        run: |
-          echo "const API_KEY = '${{ secrets.YOUR_API_KEY }}';" > apiKey.js
-        
-      - name: Run your script
-        env:
-          API_KEY: ${{ secrets.YOUR_API_KEY }}
-        run: |
-          # Aquí puedes ejecutar un script que utilice la API key, como tu script JavaScript
-          # Por ejemplo, si tu script se llama 'script.js':
-          node script.js
+    services:
+      backend:
+        image: mcr.microsoft.com/dotnet/aspnet:6.0
+        ports:
+          - 5000:5000
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build the backend
+      run: dotnet build --configuration Release
+
+    - name: Run the backend
+      run: dotnet run --project ./path/to/your/backend.csproj --urls http://0.0.0.0:5000 &
+
+    - name: Install dependencies for frontend
+      run: npm install
+
+    - name: Build frontend
+      run: npm run build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
