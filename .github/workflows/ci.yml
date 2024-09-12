@@ -32,10 +32,3 @@ jobs:
     - name: Publish the app
       working-directory: ./ExchangeAPI/ExchangeAPI
       run: dotnet publish --configuration Release --output ./publish
-
-    # Aquí puedes agregar más pasos si es necesario, como desplegar la aplicación
-
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-    # Aquí puedes añadir pasos para desplegar tu backend o continuar con otros procesos que necesites
