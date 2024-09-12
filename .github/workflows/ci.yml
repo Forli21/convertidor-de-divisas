@@ -1,46 +1,35 @@
-name: ASP.NET Core Backend with Frontend Deployment
+name: Build and Deploy Backend
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-
-    services:
-      backend:
-        image: mcr.microsoft.com/dotnet/aspnet:6.0
-        ports:
-          - 5000:5000
-
+    
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v2
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '6.x' # Cambia según tu versión de .NET
 
+    - name: Change directory to backend folder
+      run: cd exchangeapi
+      
     - name: Restore dependencies
       run: dotnet restore
-
-    - name: Build the backend
+      working-directory: ./exchangeapi # Este es el directorio de tu proyecto
+      
+    - name: Build
       run: dotnet build --configuration Release
+      working-directory: ./exchangeapi
+      
+    - name: Run tests (optional)
+      run: dotnet test --no-build --verbosity normal
+      working-directory: ./exchangeapi
 
-    - name: Run the backend
-      run: dotnet run --project ./ExchangeAPI/ExchangeAPI/ExchangeAPI.csproj --urls http://0.0.0.0:5000 &
-
-    - name: Install dependencies for frontend
-      run: npm install
-
-    - name: Build frontend
-      run: npm run build
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
