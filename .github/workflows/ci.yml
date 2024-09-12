@@ -1,35 +1,40 @@
-name: Build and Deploy Backend
+name: Build and Deploy ExchangeAPI
 
 on:
   push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout repository
+    - name: Check out the repository
       uses: actions/checkout@v2
 
     - name: Set up .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.x' # Cambia según tu versión de .NET
+        dotnet-version: '8.0.x'
 
-    - name: Change directory to backend folder
-      run: cd exchangeapi
-      
     - name: Restore dependencies
+      working-directory: ./ExchangeAPI/ExchangeAPI # Cambia al directorio correcto
       run: dotnet restore
-      working-directory: ./exchangeapi # Este es el directorio de tu proyecto
-      
-    - name: Build
-      run: dotnet build --configuration Release
-      working-directory: ./exchangeapi
-      
-    - name: Run tests (optional)
-      run: dotnet test --no-build --verbosity normal
-      working-directory: ./exchangeapi
 
+    - name: Build the project
+      working-directory: ./ExchangeAPI/ExchangeAPI
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run tests (opcional, si tienes tests configurados)
+      working-directory: ./ExchangeAPI/ExchangeAPI
+      run: dotnet test --no-restore --verbosity normal
+
+    - name: Publish the app
+      working-directory: ./ExchangeAPI/ExchangeAPI
+      run: dotnet publish --configuration Release --output ./publish
+
+    # Aquí puedes añadir pasos para desplegar tu backend o continuar con otros procesos que necesites
