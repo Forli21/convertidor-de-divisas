@@ -28,6 +28,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies for backend
+        working-directory: ./ExchangeAPI/ExchangeAPI
+        run: dotnet restore
+
+      - name: Build the backend project
+        working-directory: ./ExchangeAPI/ExchangeAPI
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish the backend app
+        working-directory: ./ExchangeAPI/ExchangeAPI
+        run: dotnet publish --configuration Release --output ./publish
+
+      - name: Start the backend server
+        working-directory: ./ExchangeAPI/ExchangeAPI/publish
+        run: dotnet ExchangeAPI.dll &
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
