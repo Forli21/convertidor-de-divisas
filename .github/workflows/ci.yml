@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - master
+      
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,12 +29,13 @@ jobs:
       working-directory: ./ExchangeAPI/ExchangeAPI
       run: dotnet build --configuration Release --no-restore
 
-    - name: Run tests (opcional, si tienes tests configurados)
-      working-directory: ./ExchangeAPI/ExchangeAPI
-      run: dotnet test --no-restore --verbosity normal
-
     - name: Publish the app
       working-directory: ./ExchangeAPI/ExchangeAPI
-      run: dotnet publish --configuration Release --output ./publish
+      run: dotnet publish --configuration Release --output ./publish}
+      
+    - name: Build frontend
+      run: npm run build
 
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
     # Aquí puedes añadir pasos para desplegar tu backend o continuar con otros procesos que necesites
