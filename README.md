@@ -12,7 +12,7 @@
 <h2>Tecnologías Utilizadas</h2>
 <ul>
     <li>HTML5</li>
-    <li>CSS3</li>
+    <li>CSS</li>
     <li>JavaScript</li>
     <li>API de tasa de cambio (ExchangeRate-API)</li>
 </ul>
